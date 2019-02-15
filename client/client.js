@@ -5,10 +5,10 @@ const os = require('os');
 let app = express();
 app.server = http.createServer(app);
 
-app.get('/', (req, res) => {
+var req_get = app.get('/', (req, res) => {
   console.log('Making v1 call');
   http.get('http://10.128.0.8/api/v1/call', (resp) => {
-      let data = '';
+    let data = '';
 
     // A chunk of data has been received.
     resp.on('data', (chunk) => {
@@ -20,18 +20,18 @@ app.get('/', (req, res) => {
       console.log(data);
       res.status(200).send({
         success: 'true',
-	from: os.hostname(),
+        from: os.hostname(),
         message: data,
       })
       console.log("v1 call completed");
     });
 
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-  res.status(500).send({
-    error: err.message,
-  })
-});
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+    res.status(500).send({
+      error: err.message,
+    })
+  });
 
 
 });

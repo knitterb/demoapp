@@ -7,7 +7,7 @@ app.server = http.createServer(app);
 
 var req_get = app.get('/', (req, res) => {
   console.log('Making v1 call');
-  http.get('http://10.128.0.8/api/v1/call', (resp) => {
+  http.get('http://localhost:5000/api/v1/call', (resp) => {
     let data = '';
 
     // A chunk of data has been received.
@@ -23,7 +23,7 @@ var req_get = app.get('/', (req, res) => {
         from: os.hostname(),
         message: data,
       })
-      console.log("v1 call completed");
+      console.log("client v1 call completed");
     });
 
   }).on("error", (err) => {

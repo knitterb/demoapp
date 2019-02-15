@@ -5,6 +5,8 @@ const os = require('os');
 let app = express();
 app.server = http.createServer(app);
 
+// the hostname and port below will need to be changed to reflect the service
+// https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
 var req_get = app.get('/', (req, res) => {
   console.log('Making v1 call');
   http.get('http://localhost:5000/api/v1/call', (resp) => {

@@ -5,7 +5,9 @@ metadata:
 spec:
   selector:
     name: client
-  type: NodePort
+  # type: NodePort
+  # clusterIP: None
+  type: LoadBalancer
   ports:
   - name: client # Actually, no port is needed.
     port: 8080
@@ -20,7 +22,7 @@ spec:
     name: server
   clusterIP: None
   ports:
-  - name: client # Actually, no port is needed.
+  - name: server # Actually, no port is needed.
     port: 5000
     targetPort: 5000
 ---
@@ -34,12 +36,12 @@ spec:
   hostname: client
   subdomain: demoapp
   containers:
-  - image: client:v2
+  - image: gcr.io/chavezjoseph-spinnaker/demoapp/client:v2
     # command:
     #   - sleep
     #   - "3600"
     name: client
-    imagePullPolicy: Never
+    # imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Pod
@@ -51,9 +53,9 @@ spec:
   hostname: server
   subdomain: demoapp
   containers:
-  - image: server:v2
+  - image: gcr.io/chavezjoseph-spinnaker/demoapp/server:v2
     # command:
     #   - sleep
     #   - "3600"
     name: server
-    imagePullPolicy: Never
+    # imagePullPolicy: Never

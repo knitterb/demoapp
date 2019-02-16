@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoapp-client
+spec:
+  selector:
+    name: client
+  type: NodePort
+  ports:
+  - name: client # Actually, no port is needed.
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoapp-server
+spec:
+  selector:
+    name: server
+  clusterIP: None
+  ports:
+  - name: client # Actually, no port is needed.
+    port: 5000
+    targetPort: 5000
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  labels:
+    name: client
+spec:
+  hostname: client
+  subdomain: demoapp
+  containers:
+  - image: client:v2
+    # command:
+    #   - sleep
+    #   - "3600"
+    name: client
+    imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+  labels:
+    name: server
+spec:
+  hostname: server
+  subdomain: demoapp
+  containers:
+  - image: server:v2
+    # command:
+    #   - sleep
+    #   - "3600"
+    name: server
+    imagePullPolicy: Never

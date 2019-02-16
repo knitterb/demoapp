@@ -9,7 +9,7 @@ app.server = http.createServer(app);
 // https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
 var req_get = app.get('/', (req, res) => {
   console.log('Making v1 call');
-  http.get('http://localhost:5000/api/v1/call', (resp) => {
+  http.get('http://demoapp-server.default.svc.cluster.local:5000/api/v1/call', (resp) => {
     let data = '';
 
     // A chunk of data has been received.

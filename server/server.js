@@ -17,6 +17,7 @@ app.get('/api/v2/call', (req, res) => {
   res.status(200).send({
     success: 'true',
     message: 'server completed v2 call from ' + os.hostname(),
+    server: 'server 1',
   })
   console.log("v2 call");
 });

@@ -23,7 +23,7 @@ var req_get = app.get('/', (req, res) => {
       res.status(200).send({
         success: 'true',
         from: os.hostname(),
-        client: "client 1",
+        client: "client 2",
         message: data,
       })
       console.log("client v1 call completed");
